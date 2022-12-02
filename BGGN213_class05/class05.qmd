@@ -1,0 +1,227 @@
+---
+title: "Class 5: Data Visualization with GGPlot"
+author: "Elena"
+format: pdf
+editor: visual
+toc: true
+---
+
+# Our First Plot
+
+R has base graphics.
+
+Note: cmd+opt+i to create R code
+
+```{r}
+plot(cars)
+```
+
+**Plotting with ggplot**
+
+Note: before using package, need to load using 'library()'.
+
+Every ggplot needs 3 layers:
+
+\-**Data** (i.e. the dataframe)
+
+\-**Aes** (the aesthetic mapping of our data to what we want to plot)
+
+\-**Geoms** (how we want to plot)
+
+```{r}
+#install.packages("ggplot2")
+library(ggplot2)
+ggplot(cars) + 
+  aes(x=speed,
+      y=dist) + 
+  geom_point() 
+```
+
+
+```{r}
+ggplot(cars) + 
+  aes(x=speed,
+      y=dist) + 
+  geom_point() + 
+  geom_smooth(method=lm,se=F) + 
+  labs(title="Speed and Stopping Distances of Cars", 
+       x="speed (mph)", 
+       y="stopping distance (ft)")
+```
+# Lab 5 Questions
+
+**Q1** For which phases is data visualization important in our scientific workflows?
+
+All of the above
+
+**Q2** True or False? The ggplot2 package comes already installed with R?
+
+False
+
+**Q3** Which plot types are typically NOT used to compare distributions of numeric variables?
+
+Network graphs
+
+**Q4** Which statement about data visualization with ggplot2 is incorrect?
+
+ggplot2 is the only way to create plots in R
+
+**Q5** Which geometric layer should be used to create scatter plots in ggplot2?
+
+geom_point()
+
+
+# Differential Gene Expression Dataset
+
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+```
+
+```{r}
+p <- ggplot(genes) + 
+  aes(x=Condition1,
+      y=Condition2,
+      color=State) + 
+  geom_point()
+p + scale_colour_manual(values=c("blue","grey","red")) + 
+  labs(title="Gene Expression Changes Upon Drug Treatment", 
+       x="Control (no drug)", 
+       y="Drug Treatment")
+```
+
+```{r}
+nrow(genes)
+colnames(genes)
+ncol(genes)
+```
+```{r}
+table(genes$State)
+round(table(genes$State)/nrow(genes)*100,2)
+```
+
+**Q1** How many genes
+
+There are `r nrow(genes)` genes in this data set.
+
+**Q2** Column names & how many columns
+
+`r colnames(genes)`
+
+There are `r ncol(genes)` columns.
+
+**Q3** How many genes are up
+
+127.
+
+**Q4** Fraction of total genes that are up
+
+2.44% genes are up.
+
+# Optional Extension
+
+```{r}
+# File location online
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+gapminder <- read.delim(url)
+
+head(gapminder)
+```
+
+```{r}
+##install.packages("dplyr")
+library(dplyr)
+gapminder_2007 <- gapminder %>% filter(year==2007)
+```
+
+```{r}
+ggplot(gapminder_2007) + 
+  aes(x=gdpPercap, 
+      y=lifeExp, 
+      colour=continent, 
+      size=pop) +
+  geom_point(alpha=0.5)
+
+ggplot(gapminder_2007) + 
+  aes(x=gdpPercap, 
+      y=lifeExp, 
+      colour=pop) + 
+  geom_point(alpha=0.5)
+
+ggplot(gapminder_2007) + 
+  aes(x=gdpPercap, 
+      y=lifeExp, 
+      size=pop) + 
+  geom_point(alpha=0.5) + 
+  scale_size_area(max_size = 10)
+```
+```{r}
+gapminder_1957 <- gapminder %>% filter(year==1957)
+head(gapminder_1957)
+```
+```{r}
+ggplot(gapminder_1957) + 
+  aes(x=gdpPercap,
+      y=lifeExp,
+      colour=continent,
+      size=pop) + 
+  geom_point(alpha=0.7) + 
+  scale_size_area(max_size = 10)
+```
+```{r}
+gapminder_1957_2007 <- gapminder %>% filter(year==1957 | year==2007)
+head(gapminder_1957_2007)
+```
+```{r}
+ggplot(gapminder_1957_2007) + 
+  aes(x=gdpPercap,
+      y=lifeExp,
+      colour=continent,
+      size=pop) + 
+  geom_point(alpha=0.7) + 
+  scale_size_area(max_size = 10) + 
+  facet_wrap(~year)
+```
+## Bar Plots
+
+```{r}
+gapminder_top5 <- gapminder %>% 
+  filter(year==2007) %>% 
+  arrange(desc(pop)) %>% 
+  top_n(5, pop)
+
+gapminder_top5
+```
+```{r}
+ggplot(gapminder_top5) + 
+  geom_col(aes(x = country, y = lifeExp, fill=continent))
+```
+```{r}
+ggplot(gapminder_top5) + 
+  aes(x = reorder(country,-pop), y = pop, fill=country) + 
+  geom_col(col="gray30") +
+  guides(fill="none")
+```
+
+
+
+# Playing with Plotly
+
+```{r}
+#install.packages("plotly")
+
+#library(plotly)
+
+#example dataset
+
+#set.seed(100)
+#d <- diamonds[sample(nrow(diamonds), 1000), ]
+
+#p <- ggplot(data = d, aes(x = carat, y = price)) +
+#  geom_point(aes(text = paste("Clarity:", clarity)), size = 4) +
+#  geom_smooth(aes(colour = cut, fill = cut)) + facet_wrap(~ cut)
+
+#ggplotly(p)
+```
