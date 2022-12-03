@@ -1,0 +1,263 @@
+---
+title: "Class 6: R Functions Lab"
+author: "Elena"
+format: gfm
+editor: visual
+date: 2022-10-14
+toc: true
+theme:
+  light: flatly
+  dark: darkly
+---
+
+# Notes
+
+**All functions in R should have at least 3 things:**
+
+-   A **name** (we pick).
+
+-   Input **arguments** (there can be loads - comma-separated).
+
+-   A **body** (the R code that does the work).
+
+**Useful**
+
+-   `!` flips the vector e.g., `!c(T,T,F)` gives `c(F,F,T)`.
+
+-   `is.na()` returns a vector with F in positions that are not NA, and T in positions that are NA.
+
+-   Code \> Extract Function to write code into function.
+
+# Q1. Writing `grade()` Function
+
+## Creating the Code
+
+**Problems:**
+
+-   Identify the lowest single score.
+
+-   Drop the lowest single score.
+
+-   Determine overall grade.
+
+-   Execute function on example gradebook.
+
+```{r}
+#Load sample vectors
+student1 <- c(100, 100, 100, 100, 100, 100, 100, 90)
+student2 <- c(100, NA, 90, 90, 90, 90, 97, 80)
+student3 <- c(90, NA, NA, NA, NA, NA, NA, NA)
+```
+
+Can use the `mean()` function to find the average
+
+```{r}
+#Example for student1
+mean(student1)
+```
+
+But... we want to drop the lowest grade; can find what the score is using `min()`
+
+```{r}
+#Example for student1
+min(student1)
+
+#Can find more details of function and 
+#other related functions by looking at help page
+?min
+```
+
+Can identify the position of the lowest score using `which.min()`.
+
+```{r}
+#Example for student1
+which.min(student1)
+
+#Note that student1 does not have any missing assignments (NA)
+#student2 and student3 has missing assignments,
+#which we will need to take into account later
+```
+
+Dropping the lowest score
+
+```{r}
+#Example for student1
+student1[-8]
+#Dropping the 8th position, but code may not
+#be applicable to other instances
+
+student1[-which.min(student1)]
+#More general and helpful
+```
+
+Therefore, for student 1, their average grade is:
+
+```{r}
+mean(student1[-which.min(student1)])
+```
+
+We need to account for NA values for the other students i.e., making them zero
+
+```{r}
+#Example for student2
+mean(student2, na.rm=T)
+#Note that by doing this, na.rm ignores all the NA values,
+#but it is not what we want
+
+#Found `is.na()` function that replaces NA values with specified value
+?is.na
+```
+
+Breaking down the `is.na()` function
+
+```{r}
+#What each element returns
+is.na(student2)
+#Vector with F for positions that are not NA,
+#T for positions that are
+
+student2[is.na(student2)]
+#Pulls out positions that are NA
+
+student2[is.na(student2)] <- 0
+#Replaces NA with specified value
+
+student2
+```
+
+Putting the steps together...
+
+```{r}
+#Example for student2
+student2[is.na(student2)] <- 0
+mean(student2[-which.min(student2)])
+```
+
+## Writing the Function!
+
+Simplifying the code...
+
+```{r}
+#Example for student1
+
+x <- student1
+
+x[is.na(x)] <- 0
+mean(x[-which.min(x)])
+
+```
+
+Now to make the function
+
+-   Instead of typing it out, can highlight the code and click Code \> Extract Function and R will format accordingly
+
+```{r}
+grade <- function(x) {
+  x[is.na(x)] <- 0
+  mean(x[-which.min(x)])
+}
+
+#x is input argument
+#Remember to load this function before using!
+```
+
+Testing the function
+
+```{r}
+grade(student1)
+grade(student2)
+grade(student3)
+```
+
+# Q2. Applying Function to Gradebook & Identifying Top Student
+
+Reading CSV file
+
+```{r}
+gradebook <- read.csv("https://tinyurl.com/gradeinput")
+
+#Note that the students column is part of the data;
+#we want to make it into rownames
+
+gradebook <- read.csv("https://tinyurl.com/gradeinput",
+                      row.names=1)
+head(gradebook)
+```
+
+Now want to introduce the `apply()` function
+
+```{r}
+?apply
+#Similar to a for loop, where it applies the function to each
+#Syntax is apply(X,MARGIN,FUN)
+#X is input i.e., gradebook
+#MARGIN 1=rows, 2=columns
+#FUN is function
+
+
+results <- apply(gradebook, 1, grade)
+results
+```
+
+Can use `which.max()` to find where the largest/max value is in this results vector. Therefore, the top-scoring student is:
+
+```{r}
+which.max(results)
+
+#To find their score, can use `max()`
+max(results)
+```
+
+# Q3. Toughest Homework
+
+Finding the average of the homework assignments
+
+```{r}
+#We can use `apply()` again, 
+#but this time over the columns i.e., MARGIN = 2
+#Remember we cannot use grade function because
+#it will get rid of the lowest scoring homework in each column
+#Use sum instead, taking into account NA using `na.rm=T`
+
+homework <- apply(gradebook, 2, sum, na.rm=T)
+homework
+```
+
+The toughest homework i.e., homework with the lowest score is:
+
+```{r}
+which.min(homework)
+```
+
+# Q4. Homework Most Predictive of Overall Score
+
+Performing a Pearson correlation
+
+```{r}
+?cor
+cor(gradebook$hw5,results)
+#Need to fix NA values first
+```
+
+Making NA values 0
+
+```{r}
+mask <- gradebook
+mask[is.na(mask)] <- 0
+head(mask)
+```
+
+Now performing Pearson correlation
+
+```{r}
+hw <- apply(mask, 2, cor, results)
+hw
+```
+
+The homework with the most predictive score is therefore:
+
+```{r}
+which.max(hw)
+```
+
+# Q5. Render Document

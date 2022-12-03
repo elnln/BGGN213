@@ -1,0 +1,225 @@
+---
+title: "Class 9: Structural Bioinformatics"
+author: "Elena"
+format: gfm
+editor: visual
+toc: TRUE
+---
+
+# Introduction to the RCSB Protein Data Bank (PDB)
+
+```{r}
+csv <- read.csv("pdb_stats.csv")
+csv
+```
+
+## Q1. What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+92.8%
+
+```{r}
+#Need to get rid of commas in numbers
+csv_X.ray <- gsub(",", "", csv$X.ray)
+csv_EM <- gsub(",", "", csv$EM)
+csv_Total <- gsub(",", "", csv$Total)
+(sum(as.numeric(csv_X.ray))+sum(as.numeric(csv_EM)))/sum(as.numeric(csv_Total))
+```
+
+## Q2. What proportion of structures in the PDB are protein?
+
+87.0%
+
+```{r}
+as.numeric(csv_Total[1])/sum(as.numeric(csv_Total))
+```
+
+## Q3. Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+Searched for HIV AND Protease, filtered for proteins, and yielded 1264 results. Each structure seems to be bound to different ligands.
+
+# Visualizing the HIV-1 protease structure
+
+![](1HSG.png)
+
+![](1HSG_D25.png)
+
+## Q4. Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+Only see oxygen atom because hydrogen atoms are much smaller than oxygen.
+
+## Q5. There is a critical "conserved" water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have
+
+Residue 308.
+
+## Q6. Generate and save a figure clearly showing the two distinct chains of HIV-protease along with the ligand. You might also consider showing the catalytic residues ASP 25 in each chain and the critical water (we recommend "Ball & Stick" for these side-chains). Add this figure to your Quarto document.
+
+![HIV protease with ligand (spacefill), catalytic residues (ball and stick), and critical H2O molecule (space fill, dark purple)](1HSG_H2O.png)
+
+# Introduction to Bio3D in R
+
+```{r}
+library(bio3d)
+pdb <- read.pdb("1hsg")
+pdb
+```
+
+```{r}
+attributes(pdb)
+```
+
+```{r}
+head(pdb$atom)
+```
+
+## Q7. How many amino acid residues are there in this pdb object?
+
+198. 
+
+## Q8. Name one of the two non-protein residues?
+
+HOH (H2O).
+
+## Q9. How many protein chains are in this structure?
+
+2 chains.
+
+# Predicting functional motions of a single structure
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+NMA to predict protein flexibility and potential functional motions (conformational changes)
+
+```{r}
+m <- nma(adk)
+plot(m)
+```
+
+```{r}
+#mktrj(m, file="adk_m7.pdb")
+```
+
+# Comparative structure analysis of Adenylate Kinase
+
+"The `install.packages()` function is used to install packages from the main CRAN repository for R packages. BioConductor is a separate repository of R packages focused on high-throughput biomolecular assays and biomolecular data. Packages from BioConductor can be installed using the `BiocManager::install()` function. Finally, R packages found on GitHub or BitBucket can be installed using `devtools::install_github()` and `devtools::install_bitbucket()` functions."
+
+```{r}
+#install.packages("bio3d")
+#install.packages("devtools")
+#install.packages("BiocManager")
+
+#BiocManager::install("msa")
+#devtools::install_bitbucket("Grantlab/bio3d-view")
+```
+
+## Q10. Which of the packages above is found only on BioConductor and not CRAN?
+
+msa.
+
+## Q11. Which of the above packages is not found on BioConductor or CRAN?
+
+bio3d-view.
+
+## Q12. True or False? Functions from the devtools package can be used to install packages from GitHub and BitBucket?
+
+True.
+
+# Search and retrieve ADK structures
+
+```{r}
+library(bio3d)
+aa <- get.seq("1ake_A")
+aa
+```
+
+## Q13. How many amino acids are in this sequence, i.e. how long is this sequence?
+
+214. 
+
+```{r}
+#Blast or hmmer search 
+b <- blast.pdb(aa)
+```
+
+```{r}
+#Plot a summary of search results
+hits <- plot(b)
+```
+
+```{r}
+#List out some 'top hits'
+head(hits$pdb.id)
+
+#There are 16 hits, but will use the ones listed on the workbook
+```
+
+```{r}
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','6S36_A','6RZE_A','3HPR_A','1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A','4K46_A','3GMT_A','4PZL_A')
+```
+
+```{r}
+# Download releated PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+# Align and superpose structures
+
+```{r}
+#Align releated PDBs
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+```
+
+```{r}
+#Vector containing PDB codes for figure axis
+#ids <- basename.pdb(pdbs$id)
+
+#Draw schematic alignment
+#plot(pdbs, labels=ids)
+
+#Worked!
+#But is causing issues with PDF export so not including in the report
+```
+
+```{r}
+#anno <- pdb.annotate(ids)
+#unique(anno$source)
+```
+
+# PCA
+
+```{r}
+#PCA
+pc.xray<- pca(pdbs)
+plot(pc.xray)
+```
+
+```{r}
+#Visualize first principal component
+#mktrj(pc.xray, pc=1, file="pc_1.pdb")
+```
+
+```{r}
+#Calculate RMSD
+rd <- rmsd(pdbs)
+
+#Structure-based clustering
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k=3)
+
+plot(pc.xray, 1:2, col="grey50", bg=grps.rd, pch=21, cex=1)
+```
+
+# Normal mode analysis
+
+```{r}
+#NMA of all structures
+modes <- nma(pdbs)
+plot(modes, pdbs, col=grps.rd)
+```
+
+## Q14. What do you note about this plot? Are the black and colored lines similar or different? Where do you think they differ most and why?
+
+There are regions where the curves are similar and regions that are different. Perhaps different most in sites that are not the active site. These proteins are similar supposedly because they share similar catalytic activity as conferred by the active site.

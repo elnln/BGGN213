@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Elena">
+
+<title>Class 6 Homework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="hw06_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hw06_files/libs/quarto-html/quarto.js"></script>
+<script src="hw06_files/libs/quarto-html/popper.min.js"></script>
+<script src="hw06_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hw06_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hw06_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hw06_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hw06_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hw06_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hw06_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#analysis-of-protein-drug-interactions" id="toc-analysis-of-protein-drug-interactions" class="nav-link active" data-scroll-target="#analysis-of-protein-drug-interactions">Analysis of Protein Drug Interactions</a>
+  <ul class="collapse">
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set-Up</a></li>
+  <li><a href="#q1.-what-type-of-object-is-returned-from-the-read.pdb-function" id="toc-q1.-what-type-of-object-is-returned-from-the-read.pdb-function" class="nav-link" data-scroll-target="#q1.-what-type-of-object-is-returned-from-the-read.pdb-function">Q1. What type of object is returned from the read.pdb() function?</a></li>
+  <li><a href="#q2.-what-does-the-trim.pdb-function-do" id="toc-q2.-what-does-the-trim.pdb-function-do" class="nav-link" data-scroll-target="#q2.-what-does-the-trim.pdb-function-do">Q2. What does the <code>trim.pdb()</code> function do?</a></li>
+  <li><a href="#q3.-what-input-parameter-would-turn-off-the-marginal-black-and-grey-rectangles-in-the-plots-and-what-do-they-represent-in-this-case" id="toc-q3.-what-input-parameter-would-turn-off-the-marginal-black-and-grey-rectangles-in-the-plots-and-what-do-they-represent-in-this-case" class="nav-link" data-scroll-target="#q3.-what-input-parameter-would-turn-off-the-marginal-black-and-grey-rectangles-in-the-plots-and-what-do-they-represent-in-this-case">Q3. What input parameter would turn off the marginal black and grey rectangles in the plots and what do they represent in this case?</a></li>
+  <li><a href="#q4.-what-would-be-a-better-plot-to-compare-across-the-different-proteins" id="toc-q4.-what-would-be-a-better-plot-to-compare-across-the-different-proteins" class="nav-link" data-scroll-target="#q4.-what-would-be-a-better-plot-to-compare-across-the-different-proteins">Q4. What would be a better plot to compare across the different proteins?</a></li>
+  <li><a href="#q5.-which-proteins-are-more-similar-to-each-other-in-their-b-factor-trends.-how-could-you-quantify-this" id="toc-q5.-which-proteins-are-more-similar-to-each-other-in-their-b-factor-trends.-how-could-you-quantify-this" class="nav-link" data-scroll-target="#q5.-which-proteins-are-more-similar-to-each-other-in-their-b-factor-trends.-how-could-you-quantify-this">Q5. Which proteins are more similar to each other in their B-factor trends. How could you quantify this?</a></li>
+  </ul></li>
+  <li><a href="#creating-function" id="toc-creating-function" class="nav-link" data-scroll-target="#creating-function">Creating Function</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 6 Homework</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Elena </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="analysis-of-protein-drug-interactions" class="level1">
+<h1>Analysis of Protein Drug Interactions</h1>
+<section id="set-up" class="level2">
+<h2 class="anchored" data-anchor-id="set-up">Set-Up</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("bio3d")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bio3d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="q1.-what-type-of-object-is-returned-from-the-read.pdb-function" class="level2">
+<h2 class="anchored" data-anchor-id="q1.-what-type-of-object-is-returned-from-the-read.pdb-function">Q1. What type of object is returned from the read.pdb() function?</h2>
+<p>A list of 8 with data frames, characters, integers, numerics, and logicals is returned from the <code>read.pdb()</code> function. The data is a PDB coordinate file, which includes information on atoms in a molecular structure and their respective information (e.g., what the atoms are) and coordinates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading in data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(<span class="st">"4AKE"</span>)  <span class="co"># kinase with drug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Accessing on-line PDB file</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(<span class="st">"1AKE"</span>)  <span class="co"># kinase no drug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Accessing on-line PDB file
+   PDB has ALT records, taking A only, rm.alt=TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(<span class="st">"1E4Y"</span>)  <span class="co"># kinase with drug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Accessing on-line PDB file</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Looking at data structure</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 8
+ $ atom  :'data.frame': 3459 obs. of  16 variables:
+  ..$ type  : chr [1:3459] "ATOM" "ATOM" "ATOM" "ATOM" ...
+  ..$ eleno : int [1:3459] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ elety : chr [1:3459] "N" "CA" "C" "O" ...
+  ..$ alt   : chr [1:3459] NA NA NA NA ...
+  ..$ resid : chr [1:3459] "MET" "MET" "MET" "MET" ...
+  ..$ chain : chr [1:3459] "A" "A" "A" "A" ...
+  ..$ resno : int [1:3459] 1 1 1 1 1 1 1 1 2 2 ...
+  ..$ insert: chr [1:3459] NA NA NA NA ...
+  ..$ x     : num [1:3459] -10.93 -9.9 -9.17 -9.8 -10.59 ...
+  ..$ y     : num [1:3459] -24.9 -24.4 -23.3 -22.3 -24 ...
+  ..$ z     : num [1:3459] -9.52 -10.48 -9.81 -9.35 -11.77 ...
+  ..$ o     : num [1:3459] 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ b     : num [1:3459] 41.5 29 27.9 26.4 34.2 ...
+  ..$ segid : chr [1:3459] NA NA NA NA ...
+  ..$ elesy : chr [1:3459] "N" "C" "C" "O" ...
+  ..$ charge: chr [1:3459] NA NA NA NA ...
+ $ xyz   : 'xyz' num [1, 1:10377] -10.93 -24.89 -9.52 -9.9 -24.42 ...
+ $ seqres: Named chr [1:428] "MET" "ARG" "ILE" "ILE" ...
+  ..- attr(*, "names")= chr [1:428] "A" "A" "A" "A" ...
+ $ helix :List of 4
+  ..$ start: Named num [1:19] 13 31 44 61 75 90 113 161 202 13 ...
+  .. ..- attr(*, "names")= chr [1:19] "" "" "" "" ...
+  ..$ end  : Named num [1:19] 24 40 54 73 77 98 121 187 213 24 ...
+  .. ..- attr(*, "names")= chr [1:19] "" "" "" "" ...
+  ..$ chain: chr [1:19] "A" "A" "A" "A" ...
+  ..$ type : chr [1:19] "5" "1" "1" "1" ...
+ $ sheet :List of 4
+  ..$ start: Named num [1:14] 192 105 2 81 27 123 131 192 105 2 ...
+  .. ..- attr(*, "names")= chr [1:14] "" "" "" "" ...
+  ..$ end  : Named num [1:14] 197 110 7 84 29 126 134 197 110 7 ...
+  .. ..- attr(*, "names")= chr [1:14] "" "" "" "" ...
+  ..$ chain: chr [1:14] "A" "A" "A" "A" ...
+  ..$ sense: chr [1:14] "0" "1" "1" "1" ...
+ $ calpha: logi [1:3459] FALSE TRUE FALSE FALSE FALSE FALSE ...
+ $ remark:List of 1
+  ..$ biomat:List of 4
+  .. ..$ num   : int 1
+  .. ..$ chain :List of 1
+  .. .. ..$ : chr [1:2] "A" "B"
+  .. ..$ mat   :List of 1
+  .. .. ..$ :List of 1
+  .. .. .. ..$ A B: num [1:3, 1:4] 1 0 0 0 1 0 0 0 1 0 ...
+  .. ..$ method: chr "AUTHOR"
+ $ call  : language read.pdb(file = "4AKE")
+ - attr(*, "class")= chr [1:2] "pdb" "sse"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 8
+ $ atom  :'data.frame': 3804 obs. of  16 variables:
+  ..$ type  : chr [1:3804] "ATOM" "ATOM" "ATOM" "ATOM" ...
+  ..$ eleno : int [1:3804] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ elety : chr [1:3804] "N" "CA" "C" "O" ...
+  ..$ alt   : chr [1:3804] NA NA NA NA ...
+  ..$ resid : chr [1:3804] "MET" "MET" "MET" "MET" ...
+  ..$ chain : chr [1:3804] "A" "A" "A" "A" ...
+  ..$ resno : int [1:3804] 1 1 1 1 1 1 1 1 2 2 ...
+  ..$ insert: chr [1:3804] NA NA NA NA ...
+  ..$ x     : num [1:3804] 27 26.1 26.7 27 24.7 ...
+  ..$ y     : num [1:3804] 54 52.8 52.2 52.9 53.3 ...
+  ..$ z     : num [1:3804] 40.1 39.9 38.7 37.7 39.6 ...
+  ..$ o     : num [1:3804] 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ b     : num [1:3804] 40.8 37.1 30.1 27.6 38.1 ...
+  ..$ segid : chr [1:3804] NA NA NA NA ...
+  ..$ elesy : chr [1:3804] "N" "C" "C" "O" ...
+  ..$ charge: chr [1:3804] NA NA NA NA ...
+ $ xyz   : 'xyz' num [1, 1:11412] 27 54 40.1 26.1 52.8 ...
+ $ seqres: Named chr [1:428] "MET" "ARG" "ILE" "ILE" ...
+  ..- attr(*, "names")= chr [1:428] "A" "A" "A" "A" ...
+ $ helix :List of 4
+  ..$ start: Named num [1:18] 12 30 49 60 89 115 160 177 201 12 ...
+  .. ..- attr(*, "names")= chr [1:18] "" "" "" "" ...
+  ..$ end  : Named num [1:18] 25 42 56 73 99 121 175 188 214 25 ...
+  .. ..- attr(*, "names")= chr [1:18] "" "" "" "" ...
+  ..$ chain: chr [1:18] "A" "A" "A" "A" ...
+  ..$ type : chr [1:18] "1" "1" "1" "1" ...
+ $ sheet :List of 4
+  ..$ start: Named num [1:18] 27 81 1 104 192 131 122 151 144 27 ...
+  .. ..- attr(*, "names")= chr [1:18] "" "" "" "" ...
+  ..$ end  : Named num [1:18] 29 84 6 110 198 135 126 154 146 29 ...
+  .. ..- attr(*, "names")= chr [1:18] "" "" "" "" ...
+  ..$ chain: chr [1:18] "A" "A" "A" "A" ...
+  ..$ sense: chr [1:18] "0" "1" "1" "1" ...
+ $ calpha: logi [1:3804] FALSE TRUE FALSE FALSE FALSE FALSE ...
+ $ remark:List of 1
+  ..$ biomat:List of 4
+  .. ..$ num   : int 2
+  .. ..$ chain :List of 2
+  .. .. ..$ : chr "A"
+  .. .. ..$ : chr "B"
+  .. ..$ mat   :List of 2
+  .. .. ..$ :List of 1
+  .. .. .. ..$ A: num [1:3, 1:4] 1 0 0 0 1 0 0 0 1 0 ...
+  .. .. ..$ :List of 1
+  .. .. .. ..$ B: num [1:3, 1:4] 1 0 0 0 1 0 0 0 1 0 ...
+  .. ..$ method: chr [1:2] "AUTHOR" "AUTHOR"
+ $ call  : language read.pdb(file = "1AKE")
+ - attr(*, "class")= chr [1:2] "pdb" "sse"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 8
+ $ atom  :'data.frame': 3428 obs. of  16 variables:
+  ..$ type  : chr [1:3428] "ATOM" "ATOM" "ATOM" "ATOM" ...
+  ..$ eleno : int [1:3428] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ elety : chr [1:3428] "N" "CA" "C" "O" ...
+  ..$ alt   : chr [1:3428] NA NA NA NA ...
+  ..$ resid : chr [1:3428] "MET" "MET" "MET" "MET" ...
+  ..$ chain : chr [1:3428] "A" "A" "A" "A" ...
+  ..$ resno : int [1:3428] 1 1 1 1 1 1 1 1 2 2 ...
+  ..$ insert: chr [1:3428] NA NA NA NA ...
+  ..$ x     : num [1:3428] 18.9 18.8 17.6 16.7 18.7 ...
+  ..$ y     : num [1:3428] -5.38 -4.15 -3.41 -4.12 -4.49 ...
+  ..$ z     : num [1:3428] 8.25 7.48 7.92 8.4 6.02 ...
+  ..$ o     : num [1:3428] 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ b     : num [1:3428] 24.2 25.5 23.1 22.1 26.9 ...
+  ..$ segid : chr [1:3428] NA NA NA NA ...
+  ..$ elesy : chr [1:3428] "N" "C" "C" "O" ...
+  ..$ charge: chr [1:3428] NA NA NA NA ...
+ $ xyz   : 'xyz' num [1, 1:10284] 18.9 -5.38 8.25 18.81 -4.15 ...
+ $ seqres: Named chr [1:428] "MET" "ARG" "ILE" "ILE" ...
+  ..- attr(*, "names")= chr [1:428] "A" "A" "A" "A" ...
+ $ helix :List of 4
+  ..$ start: Named num [1:22] 12 31 43 60 76 89 114 156 160 176 ...
+  .. ..- attr(*, "names")= chr [1:22] "" "" "" "" ...
+  ..$ end  : Named num [1:22] 24 40 55 73 80 100 122 159 175 188 ...
+  .. ..- attr(*, "names")= chr [1:22] "" "" "" "" ...
+  ..$ chain: chr [1:22] "A" "A" "A" "A" ...
+  ..$ type : chr [1:22] "1" "1" "1" "1" ...
+ $ sheet :List of 4
+  ..$ start: Named num [1:14] 28 81 2 105 193 123 131 28 81 2 ...
+  .. ..- attr(*, "names")= chr [1:14] "" "" "" "" ...
+  ..$ end  : Named num [1:14] 30 84 7 110 197 126 134 30 84 7 ...
+  .. ..- attr(*, "names")= chr [1:14] "" "" "" "" ...
+  ..$ chain: chr [1:14] "A" "A" "A" "A" ...
+  ..$ sense: chr [1:14] "0" "1" "1" "1" ...
+ $ calpha: logi [1:3428] FALSE TRUE FALSE FALSE FALSE FALSE ...
+ $ remark:List of 1
+  ..$ biomat:List of 4
+  .. ..$ num   : int 2
+  .. ..$ chain :List of 2
+  .. .. ..$ : chr "A"
+  .. .. ..$ : chr "B"
+  .. ..$ mat   :List of 2
+  .. .. ..$ :List of 1
+  .. .. .. ..$ A: num [1:3, 1:4] 1 0 0 0 1 0 0 0 1 0 ...
+  .. .. ..$ :List of 1
+  .. .. .. ..$ B: num [1:3, 1:4] 1 0 0 0 1 0 0 0 1 0 ...
+  .. ..$ method: chr [1:2] "AUTHOR" "AUTHOR"
+ $ call  : language read.pdb(file = "1E4Y")
+ - attr(*, "class")= chr [1:2] "pdb" "sse"</code></pre>
+</div>
+</div>
+</section>
+<section id="q2.-what-does-the-trim.pdb-function-do" class="level2">
+<h2 class="anchored" data-anchor-id="q2.-what-does-the-trim.pdb-function-do">Q2. What does the <code>trim.pdb()</code> function do?</h2>
+<p>The <code>trim.pdb()</code> function creates a smaller PDB object containing a subset of atoms from a larger PDB object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Checking `trim.pdb()` function</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>?trim.pdb</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Calling `trim.pdb()` function</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>s1.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s1, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>s2.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s2, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>s3.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s3, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Looking at data</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s1.chainA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 7
+ $ atom  :'data.frame': 214 obs. of  16 variables:
+  ..$ type  : chr [1:214] "ATOM" "ATOM" "ATOM" "ATOM" ...
+  ..$ eleno : int [1:214] 2 10 21 29 37 45 53 57 62 69 ...
+  ..$ elety : chr [1:214] "CA" "CA" "CA" "CA" ...
+  ..$ alt   : chr [1:214] NA NA NA NA ...
+  ..$ resid : chr [1:214] "MET" "ARG" "ILE" "ILE" ...
+  ..$ chain : chr [1:214] "A" "A" "A" "A" ...
+  ..$ resno : int [1:214] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ insert: chr [1:214] NA NA NA NA ...
+  ..$ x     : num [1:214] -9.9 -7.03 -5.23 -2.48 -2.56 ...
+  ..$ y     : num [1:214] -24.4 -22.4 -20.1 -17.5 -15 ...
+  ..$ z     : num [1:214] -10.48 -9.05 -11.46 -11.03 -13.96 ...
+  ..$ o     : num [1:214] 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ b     : num [1:214] 29 18.4 16.2 19.7 20.3 ...
+  ..$ segid : chr [1:214] NA NA NA NA ...
+  ..$ elesy : chr [1:214] "C" "C" "C" "C" ...
+  ..$ charge: chr [1:214] NA NA NA NA ...
+ $ helix :List of 4
+  ..$ start: Named num [1:9] 13 31 44 61 75 90 113 161 202
+  .. ..- attr(*, "names")= chr [1:9] "" "" "" "" ...
+  ..$ end  : Named num [1:9] 24 40 54 73 77 98 121 187 213
+  .. ..- attr(*, "names")= chr [1:9] "" "" "" "" ...
+  ..$ chain: chr [1:9] "A" "A" "A" "A" ...
+  ..$ type : chr [1:9] "5" "1" "1" "1" ...
+ $ sheet :List of 4
+  ..$ start: Named num [1:7] 192 105 2 81 27 123 131
+  .. ..- attr(*, "names")= chr [1:7] "" "" "" "" ...
+  ..$ end  : Named num [1:7] 197 110 7 84 29 126 134
+  .. ..- attr(*, "names")= chr [1:7] "" "" "" "" ...
+  ..$ chain: chr [1:7] "A" "A" "A" "A" ...
+  ..$ sense: chr [1:7] "0" "1" "1" "1" ...
+ $ seqres: Named chr [1:428] "MET" "ARG" "ILE" "ILE" ...
+  ..- attr(*, "names")= chr [1:428] "A" "A" "A" "A" ...
+ $ xyz   : 'xyz' num [1, 1:642] -9.9 -24.42 -10.48 -7.03 -22.35 ...
+ $ calpha: logi [1:214] TRUE TRUE TRUE TRUE TRUE TRUE ...
+ $ call  : language trim.pdb(pdb = s1, chain = "A", elety = "CA")
+ - attr(*, "class")= chr [1:2] "pdb" "sse"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s2.chainA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 7
+ $ atom  :'data.frame': 214 obs. of  16 variables:
+  ..$ type  : chr [1:214] "ATOM" "ATOM" "ATOM" "ATOM" ...
+  ..$ eleno : int [1:214] 2 10 21 29 37 45 53 57 62 69 ...
+  ..$ elety : chr [1:214] "CA" "CA" "CA" "CA" ...
+  ..$ alt   : chr [1:214] NA NA NA NA ...
+  ..$ resid : chr [1:214] "MET" "ARG" "ILE" "ILE" ...
+  ..$ chain : chr [1:214] "A" "A" "A" "A" ...
+  ..$ resno : int [1:214] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ insert: chr [1:214] NA NA NA NA ...
+  ..$ x     : num [1:214] 26.1 27.4 25 25.2 22.4 ...
+  ..$ y     : num [1:214] 52.8 50 48 44.9 44.5 ...
+  ..$ z     : num [1:214] 39.9 37.8 35.7 33.4 30.7 ...
+  ..$ o     : num [1:214] 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ b     : num [1:214] 37.1 25.8 23.9 17.8 19.9 ...
+  ..$ segid : chr [1:214] NA NA NA NA ...
+  ..$ elesy : chr [1:214] "C" "C" "C" "C" ...
+  ..$ charge: chr [1:214] NA NA NA NA ...
+ $ helix :List of 4
+  ..$ start: Named num [1:9] 12 30 49 60 89 115 160 177 201
+  .. ..- attr(*, "names")= chr [1:9] "" "" "" "" ...
+  ..$ end  : Named num [1:9] 25 42 56 73 99 121 175 188 214
+  .. ..- attr(*, "names")= chr [1:9] "" "" "" "" ...
+  ..$ chain: chr [1:9] "A" "A" "A" "A" ...
+  ..$ type : chr [1:9] "1" "1" "1" "1" ...
+ $ sheet :List of 4
+  ..$ start: Named num [1:9] 27 81 1 104 192 131 122 151 144
+  .. ..- attr(*, "names")= chr [1:9] "" "" "" "" ...
+  ..$ end  : Named num [1:9] 29 84 6 110 198 135 126 154 146
+  .. ..- attr(*, "names")= chr [1:9] "" "" "" "" ...
+  ..$ chain: chr [1:9] "A" "A" "A" "A" ...
+  ..$ sense: chr [1:9] "0" "1" "1" "1" ...
+ $ seqres: Named chr [1:428] "MET" "ARG" "ILE" "ILE" ...
+  ..- attr(*, "names")= chr [1:428] "A" "A" "A" "A" ...
+ $ xyz   : 'xyz' num [1, 1:642] 26.1 52.8 39.9 27.4 50 ...
+ $ calpha: logi [1:214] TRUE TRUE TRUE TRUE TRUE TRUE ...
+ $ call  : language trim.pdb(pdb = s2, chain = "A", elety = "CA")
+ - attr(*, "class")= chr [1:2] "pdb" "sse"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s3.chainA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 7
+ $ atom  :'data.frame': 214 obs. of  16 variables:
+  ..$ type  : chr [1:214] "ATOM" "ATOM" "ATOM" "ATOM" ...
+  ..$ eleno : int [1:214] 2 10 21 29 37 45 53 57 62 70 ...
+  ..$ elety : chr [1:214] "CA" "CA" "CA" "CA" ...
+  ..$ alt   : chr [1:214] NA NA NA NA ...
+  ..$ resid : chr [1:214] "MET" "ARG" "ILE" "ILE" ...
+  ..$ chain : chr [1:214] "A" "A" "A" "A" ...
+  ..$ resno : int [1:214] 1 2 3 4 5 6 7 8 9 10 ...
+  ..$ insert: chr [1:214] NA NA NA NA ...
+  ..$ x     : num [1:214] 18.81 16.13 13.8 10.82 8.18 ...
+  ..$ y     : num [1:214] -4.15 -1.45 -0.01 2.38 1.95 ...
+  ..$ z     : num [1:214] 7.48 8.25 5.61 5.75 3 ...
+  ..$ o     : num [1:214] 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ b     : num [1:214] 25.46 17.86 10.28 4.73 4.36 ...
+  ..$ segid : chr [1:214] NA NA NA NA ...
+  ..$ elesy : chr [1:214] "C" "C" "C" "C" ...
+  ..$ charge: chr [1:214] NA NA NA NA ...
+ $ helix :List of 4
+  ..$ start: Named num [1:11] 12 31 43 60 76 89 114 156 160 176 ...
+  .. ..- attr(*, "names")= chr [1:11] "" "" "" "" ...
+  ..$ end  : Named num [1:11] 24 40 55 73 80 100 122 159 175 188 ...
+  .. ..- attr(*, "names")= chr [1:11] "" "" "" "" ...
+  ..$ chain: chr [1:11] "A" "A" "A" "A" ...
+  ..$ type : chr [1:11] "1" "1" "1" "1" ...
+ $ sheet :List of 4
+  ..$ start: Named num [1:7] 28 81 2 105 193 123 131
+  .. ..- attr(*, "names")= chr [1:7] "" "" "" "" ...
+  ..$ end  : Named num [1:7] 30 84 7 110 197 126 134
+  .. ..- attr(*, "names")= chr [1:7] "" "" "" "" ...
+  ..$ chain: chr [1:7] "A" "A" "A" "A" ...
+  ..$ sense: chr [1:7] "0" "1" "1" "1" ...
+ $ seqres: Named chr [1:428] "MET" "ARG" "ILE" "ILE" ...
+  ..- attr(*, "names")= chr [1:428] "A" "A" "A" "A" ...
+ $ xyz   : 'xyz' num [1, 1:642] 18.81 -4.15 7.48 16.13 -1.45 ...
+ $ calpha: logi [1:214] TRUE TRUE TRUE TRUE TRUE TRUE ...
+ $ call  : language trim.pdb(pdb = s3, chain = "A", elety = "CA")
+ - attr(*, "class")= chr [1:2] "pdb" "sse"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>s1.b <span class="ot">&lt;-</span> s1.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>s2.b <span class="ot">&lt;-</span> s2.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>s3.b <span class="ot">&lt;-</span> s3.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="q3.-what-input-parameter-would-turn-off-the-marginal-black-and-grey-rectangles-in-the-plots-and-what-do-they-represent-in-this-case" class="level2">
+<h2 class="anchored" data-anchor-id="q3.-what-input-parameter-would-turn-off-the-marginal-black-and-grey-rectangles-in-the-plots-and-what-do-they-represent-in-this-case">Q3. What input parameter would turn off the marginal black and grey rectangles in the plots and what do they represent in this case?</h2>
+<p>Setting the <code>top</code> and <code>bot</code> parameters to <code>FALSE</code> would turn off the rectangles. The black rectangles represent the locations of alpha helices, and the grey rectangles represent the locations of beta sheets, along the protein sequence.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s1.b, <span class="at">sse=</span>s1.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s2.b, <span class="at">sse=</span>s2.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s3.b, <span class="at">sse=</span>s3.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Turning off marginal rectangles</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#First, check arguments for function `plotb3()`</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>?plotb3</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#`top` and `bot` appear to be what controls the rectangles</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Therefore, to turn off, change arguments to F</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s1.b, <span class="at">sse=</span>s1.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>, <span class="at">top=</span><span class="cn">FALSE</span>, <span class="at">bot=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s2.b, <span class="at">sse=</span>s2.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>, <span class="at">top=</span><span class="cn">FALSE</span>, <span class="at">bot=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s3.b, <span class="at">sse=</span>s3.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>, <span class="at">top=</span><span class="cn">FALSE</span>, <span class="at">bot=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#According to the help page, there are arguments that can control</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the colors of the alpha helices and beta sheets</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#For example:</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s1.b, <span class="at">sse=</span>s1.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s1.b, <span class="at">sse=</span>s1.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">helix.col=</span><span class="st">"red"</span>, <span class="at">sheet.col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Therefore, the rectangles represent where the alpha helices and beta sheets</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#are located along the protein sequence</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="q4.-what-would-be-a-better-plot-to-compare-across-the-different-proteins" class="level2">
+<h2 class="anchored" data-anchor-id="q4.-what-would-be-a-better-plot-to-compare-across-the-different-proteins">Q4. What would be a better plot to compare across the different proteins?</h2>
+<p>A better plot would perhaps be a plot overlaid with data from each of the proteins so that it is easier to visually compare. Or, in the next question, using a cluster dendrogram would be a more quantitative (rather than qualitative) way of comparing the B-factor trends.</p>
+</section>
+<section id="q5.-which-proteins-are-more-similar-to-each-other-in-their-b-factor-trends.-how-could-you-quantify-this" class="level2">
+<h2 class="anchored" data-anchor-id="q5.-which-proteins-are-more-similar-to-each-other-in-their-b-factor-trends.-how-could-you-quantify-this">Q5. Which proteins are more similar to each other in their B-factor trends. How could you quantify this?</h2>
+<p>Proteins s2 and s3 are more similar to each other in their B-factor trends. Using <code>dist()</code>, we can quantify the distance of s1, s2, and s3 B-factor trends from one another.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting dendrogram, where</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#`rbind()` combines data from s1.b, s2.b, and s3.b</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#`dist()` calculates the distance between the entries of the data matrix</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#`hclust()` performs a hierarchical cluster analysis</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>( <span class="fu">dist</span>( <span class="fu">rbind</span>(s1.b, s2.b, s3.b) ) )</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="creating-function" class="level1">
+<h1>Creating Function</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Here is the analysis code again</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Data is read in from the PDB database</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(<span class="st">"4AKE"</span>)  <span class="co"># kinase with drug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Accessing on-line PDB file</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in get.pdb(file, path = tempdir(), verbose = FALSE): /var/folders/
+d2/89w3p8556q34tghk_dhy2nn40000gn/T//RtmpyLGf7c/4AKE.pdb exists. Skipping
+download</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(<span class="st">"1AKE"</span>)  <span class="co"># kinase no drug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Accessing on-line PDB file</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in get.pdb(file, path = tempdir(), verbose = FALSE): /var/folders/
+d2/89w3p8556q34tghk_dhy2nn40000gn/T//RtmpyLGf7c/1AKE.pdb exists. Skipping
+download</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   PDB has ALT records, taking A only, rm.alt=TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">read.pdb</span>(<span class="st">"1E4Y"</span>)  <span class="co"># kinase with drug</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Accessing on-line PDB file</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in get.pdb(file, path = tempdir(), verbose = FALSE): /var/folders/
+d2/89w3p8556q34tghk_dhy2nn40000gn/T//RtmpyLGf7c/1E4Y.pdb exists. Skipping
+download</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#(1) Pulling out data for Chain A</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>s1.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s1, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>s2.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s2, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>s3.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s3, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">#(2) Pulling out the B-factors for Chain A</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>s1.b <span class="ot">&lt;-</span> s1.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>s2.b <span class="ot">&lt;-</span> s2.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>s3.b <span class="ot">&lt;-</span> s3.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co">#(3) Plotting residues by B-factor</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s1.b, <span class="at">sse=</span>s1.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s2.b, <span class="at">sse=</span>s2.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s3.b, <span class="at">sse=</span>s3.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Simplifying code for Step (1)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Where `x` represents the input data</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#s1 as example</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> s1</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>x.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(x, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Simplifying code for Step (2)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Where `x` represents the input data</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>x.b <span class="ot">&lt;-</span> x.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Simplifying code for Step (3)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Where `x` represents the input data</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(x.b, <span class="at">sse=</span>x.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Putting it all together</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using Code &gt; Extract Function to write into function</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>bfactorplot <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  x.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(x, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  x.b <span class="ot">&lt;-</span> x.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotb3</span>(x.b, <span class="at">sse=</span>x.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Where...</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Input to function `x` is the downloaded PDB dataset</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Function extracts B-factor information from Chain A of the PDB data and</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="co">#plots it against the residues of Chain A</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To use the function, simply plug in the dataset into the <code>x</code> in <code>bfactorplot(x)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Example for s2</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bfactorplot</span>(s2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Output is the same as if we did each of the steps on their own</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>s2.chainA <span class="ot">&lt;-</span> <span class="fu">trim.pdb</span>(s2, <span class="at">chain=</span><span class="st">"A"</span>, <span class="at">elety=</span><span class="st">"CA"</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>s2.b <span class="ot">&lt;-</span> s2.chainA<span class="sc">$</span>atom<span class="sc">$</span>b</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotb3</span>(s2.b, <span class="at">sse=</span>s2.chainA, <span class="at">typ=</span><span class="st">"l"</span>, <span class="at">ylab=</span><span class="st">"Bfactor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Testing it on s1 and s3</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bfactorplot</span>(s1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bfactorplot</span>(s3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="hw06_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,250 @@
+---
+title: "Class 6 Homework"
+author: "Elena"
+format: pdf
+editor: visual
+toc: true
+---
+
+# Analysis of Protein Drug Interactions
+
+## Set-Up
+
+```{r}
+#install.packages("bio3d")
+library(bio3d)
+```
+
+## Q1. What type of object is returned from the read.pdb() function?
+
+A list of 8 with data frames, characters, integers, numerics, and logicals is returned from the `read.pdb()` function. The data is a PDB coordinate file, which includes information on atoms in a molecular structure and their respective information (e.g., what the atoms are) and coordinates.
+
+```{r}
+#Reading in data
+s1 <- read.pdb("4AKE")  # kinase with drug
+s2 <- read.pdb("1AKE")  # kinase no drug
+s3 <- read.pdb("1E4Y")  # kinase with drug
+```
+
+```{r}
+#Looking at data structure
+str(s1)
+str(s2)
+str(s3)
+```
+
+## Q2. What does the `trim.pdb()` function do?
+
+The `trim.pdb()` function creates a smaller PDB object containing a subset of atoms from a larger PDB object.
+
+```{r}
+#Checking `trim.pdb()` function
+?trim.pdb
+
+#Calling `trim.pdb()` function
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA")
+
+#Looking at data
+str(s1.chainA)
+str(s2.chainA)
+str(s3.chainA)
+```
+
+```{r}
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+```
+
+## Q3. What input parameter would turn off the marginal black and grey rectangles in the plots and what do they represent in this case?
+
+Setting the `top` and `bot` parameters to `FALSE` would turn off the rectangles. The black rectangles represent the locations of alpha helices, and the grey rectangles represent the locations of beta sheets, along the protein sequence.
+
+```{r}
+#Plotting data
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+```
+
+```{r}
+#Turning off marginal rectangles
+#First, check arguments for function `plotb3()`
+?plotb3
+#`top` and `bot` appear to be what controls the rectangles
+
+#Therefore, to turn off, change arguments to F
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor", top=FALSE, bot=FALSE)
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor", top=FALSE, bot=FALSE)
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor", top=FALSE, bot=FALSE)
+```
+```{r}
+#According to the help page, there are arguments that can control
+#the colors of the alpha helices and beta sheets
+
+#For example:
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor",
+       helix.col="red", sheet.col="blue")
+
+#Therefore, the rectangles represent where the alpha helices and beta sheets
+#are located along the protein sequence
+```
+
+## Q4. What would be a better plot to compare across the different proteins?
+
+A better plot would perhaps be a plot overlaid with data from each of the proteins so that it is easier to visually compare. Or, in the next question, using a cluster dendrogram would be a more quantitative (rather than qualitative) way of comparing the B-factor trends.
+
+## Q5. Which proteins are more similar to each other in their B-factor trends. How could you quantify this?
+
+Proteins s2 and s3 are more similar to each other in their B-factor trends. Using `dist()`, we can quantify the distance of s1, s2, and s3 B-factor trends from one another. 
+
+```{r}
+#Plotting dendrogram, where
+#`rbind()` combines data from s1.b, s2.b, and s3.b
+#`dist()` calculates the distance between the entries of the data matrix
+#`hclust()` performs a hierarchical cluster analysis
+
+hc <- hclust( dist( rbind(s1.b, s2.b, s3.b) ) )
+plot(hc)
+```
+
+# Creating Function
+
+## For Proteins with Chain A
+
+```{r}
+#Here is the analysis code again
+
+#Data is read in from the PDB database
+s1 <- read.pdb("4AKE")  # kinase with drug
+s2 <- read.pdb("1AKE")  # kinase no drug
+s3 <- read.pdb("1E4Y")  # kinase with drug
+
+#(1) Pulling out data for Chain A
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA")
+
+#(2) Pulling out the B-factors for Chain A
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+
+#(3) Plotting B-factor by residues of Chain A
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+```
+
+Simplifying code for Step (1)
+
+```{r}
+#Where `x` represents the input data
+#s1 as example
+x <- s1
+x.chainA <- trim.pdb(x, chain="A", elety="CA")
+```
+
+Simplifying code for Step (2)
+
+```{r}
+#Where `x` represents the input data
+x.b <- x.chainA$atom$b
+```
+
+Simplifying code for Step (3)
+
+```{r}
+#Where `x` represents the input data
+plotb3(x.b, sse=x.chainA, typ="l", ylab="Bfactor")
+```
+
+Putting it all together
+
+```{r}
+#Using Code > Extract Function to write into function
+
+bfactorplot <- function(x) {
+  x.chainA <- trim.pdb(x, chain="A", elety="CA")
+  x.b <- x.chainA$atom$b
+  plotb3(x.b, sse=x.chainA, typ="l", ylab="Bfactor")
+}
+
+#Where...
+#Input to function `x` is the downloaded PDB dataset
+#Function extracts B-factor information from Chain A of the PDB data and
+#plots it against the residues of Chain A
+```
+
+To use the function, simply plug in the dataset into the `x` in `bfactorplot(x)`
+
+```{r}
+#Example for s2
+bfactorplot(s2)
+```
+
+```{r}
+#Output is the same as if we did each of the steps on their own
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s2.b <- s2.chainA$atom$b
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+```
+
+```{r}
+#Testing it on s1 and s3
+bfactorplot(s1)
+bfactorplot(s3)
+```
+
+## Generalizing Code for Any Protein Structure
+
+The above code was generated for Chain A of example datasets s1, s2, and s3. To ensure that it can be used for other PDB datasets (e.g., containing different chains), we would need to create another variable that can call on the specified chain.
+
+```{r}
+#Modifying above code
+
+bfactorplot_general <- function(x, Y) {
+  x.chainY <- trim.pdb(x, chain=Y, elety="CA")
+  x.b <- x.chainY$atom$b
+  plotb3(x.b, sse=x.chainY, typ="l", ylab="Bfactor")
+}
+
+#Input to function `x` is the downloaded PDB dataset
+#and `Y` is the Chain in quotations (e.g., Chain A is "A")
+#Function extracts B-factor information from Chain Y of the PDB data and
+#plots it against the residues of Chain Y
+```
+
+```{r}
+#Testing it on s1
+bfactorplot_general(s1,"A")
+```
+
+Testing the function on a random protein from PDB...
+
+```{r}
+#First, read the data
+s4 <- read.pdb("7K4M")
+str(s4)
+```
+
+```{r}
+#Input into function; plotting B-factor values from Chain C against Chain C
+bfactorplot_general(s4,"C")
+```
+
+```{r}
+#Comparing against our original code...
+s4.chainC <- trim.pdb(s4, chain="C", elety="CA")
+s4.b <- s4.chainC$atom$b
+plotb3(s4.b, sse=s4.chainC, typ="l", ylab="Bfactor")
+
+#Output appears to be the same
+```
+
+
+
+

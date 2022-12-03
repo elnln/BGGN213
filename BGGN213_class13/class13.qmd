@@ -1,0 +1,252 @@
+---
+title: "Class 13: Pathway Analysis from RNA-Seq Results"
+author: "Elena"
+format: gfm
+editor: visual
+toc: TRUE
+---
+
+# Background
+
+-   Read countData and colData
+
+-   Check and fix countData if required
+
+-   DESeq Analysis
+
+-   Visualization
+
+-   Gene Annotation
+
+-   Pathway Analysis
+
+The data for for hands-on session comes from GEO entry: GSE37704, which is associated with the following publication:
+
+> Trapnell C, Hendrickson DG, Sauvageau M, Goff L et al. "Differential analysis of gene regulation at transcript resolution with RNA-seq". Nat Biotechnol 2013 Jan;31(1):46-53. PMID: 23222703
+
+# 1. Read countData and colData
+
+```{r}
+colData <- read.csv("GSE37704_metadata.csv", row.names=1)
+countData <- read.csv("GSE37704_featurecounts.csv", row.names=1)
+
+head(colData)
+head(countData)
+```
+
+# 2. Fix countData
+
+```{r}
+#Get rid of length column in countData
+countData <- countData[,-1]
+head(countData)
+```
+
+Make sure the colData column names matches the countData row names:
+
+```{r}
+all(rownames(colData) == colnames(countData))
+```
+
+Looks good, apart from the 0 count genes. Remove:
+
+```{r}
+keep.inds <- rowSums(countData) != 0 #Get indices that do not equal 0
+counts <- countData[keep.inds,] #Keep only indices that do not equal 0
+head(counts)
+```
+
+```{r}
+nrow(counts)
+```
+
+## QC with PCA
+
+The `prcomp()` function in base R is often used to check:
+
+```{r}
+pca <- prcomp(t(counts),scale=T)
+summary(pca)
+```
+
+```{r}
+plot(pca$x[,1], pca$x[,2], col=as.factor(colData$condition), pch=16)
+```
+
+The major variance in this dataset is consistent with different condition.
+
+# 3. DESeq Analysis
+
+```{r, message=FALSE}
+library(DESeq2)
+```
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData = counts,
+                              colData = colData,
+                              design = ~condition,)
+dds <- DESeq(dds)
+
+res <- results(dds)
+head(res)
+```
+
+```{r}
+summary(res)
+```
+
+```{r}
+#Colour vector for all genes
+mycols <- rep("gray", nrow(counts))
+#If log2FC > 2 or < -2, colour blue; if padj > 0.05, colour grey
+mycols[res$log2FoldChange > 2] <- "blue"
+mycols[res$log2FoldChange < -2] <- "blue"
+mycols[res$padj > 0.05] <- "grey"
+
+plot(res$log2FoldChange, -log(res$padj), col=mycols)
+abline(v=c(-2,+2))
+```
+
+# 4. Add Gene Annotation
+
+```{r, message=FALSE}
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+columns(org.Hs.eg.db)
+```
+
+Use `mapIDs()` to add SYMBOL and ENTREZID annotation to our results.
+
+```{r}
+res$symbol <- mapIds(org.Hs.eg.db,
+                     keys = rownames(counts),
+                     keytype = "ENSEMBL",
+                     column = "SYMBOL",
+                     multiVals = "first")
+head(res)
+```
+
+```{r}
+res$entrez <- mapIds(org.Hs.eg.db,
+                     keys = rownames(counts),
+                     keytype = "ENSEMBL",
+                     column = "ENTREZID",
+                     multiVals="first")
+head(res)
+```
+
+```{r}
+res$genenames <- mapIds(org.Hs.eg.db,
+                     keys = rownames(counts),
+                     keytype = "ENSEMBL",
+                     column = "GENENAME",
+                     multiVals="first")
+head(res)
+```
+
+```{r}
+res = res[order(res$pvalue),]
+write.csv(res, file="deseq_results.csv")
+```
+
+# 5. Pathway Analysis
+
+We can use `gage()` with KEGG and GO.
+
+```{r, message=FALSE}
+library(gage)
+library(gageData)
+library(pathview)
+```
+
+What `gage()` wants as input is that vector of importance - in our case, that will be the log2 FC values. This vector should have `names()` that are ENTREZ IDs.
+
+```{r}
+foldchange <- res$log2FoldChange
+names(foldchange) <- res$entrez
+head(foldchange)
+```
+
+```{r}
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+keggres = gage(foldchange, gsets=kegg.sets.hs)
+```
+
+```{r}
+head(keggres$greater,5)
+```
+
+```{r}
+head(keggres$less,5)
+```
+
+
+```{r, message=FALSE}
+pathview(gene.data=foldchange, pathway.id="hsa04110")
+```
+
+![](hsa04110.pathview.png)
+
+Top 5 downregulated pathways:
+
+```{r}
+keggrespathwaysless5 <- rownames(keggres$less)[1:5]
+
+# Extract the 8 character long IDs part of each string
+keggresids = substr(keggrespathwaysless5, start=1, stop=8)
+keggresids
+```
+
+```{r, message=FALSE}
+pathview(gene.data=foldchange, pathway.id=keggresids, species="hsa")
+```
+
+![](hsa03030.pathview.png)
+
+![](hsa05130.pathview.png)
+
+![](hsa03013.pathview.png)
+
+![](hsa03440.pathview.png)
+
+## GO Analysis
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchange, gsets=gobpsets, same.dir=TRUE)
+
+lapply(gobpres, head)
+```
+
+## Reactome
+
+We can use the online version
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
+What pathway has the most significant “Entities p-value”?
+
+- Endosomal/vacuolar pathway
+- Antigen presentation (MHC class I)
+- Cell cycle, Mitotic
+- Mitotic spindle checkpoint
+- etc.
+
+Do the most significant pathways listed match your previous KEGG results?
+
+- For the most part, seems to match the downregulated KEGG pathways. Not so much the upregulated KEGG pathways.
+
+What factors could cause differences between the two methods?
+
+- Perhaps different annotations for genes, or different categorizations.
