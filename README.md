@@ -2,7 +2,7 @@
 
 Class work for [Bioinformatics at UC San Diego](https://bioboot.github.io/bggn213_F22/).
 
-- Class 5: [Data Visualization with ggplot](https://github.com/elnln/BGGN213/blob/83d745a25a453b9a51cb201bdfb8395e22693f55/BGGN213_class05/class05.md)
+- Class 5: [Data Visualization with ggplot](BGGN213_class05/class05.md)
 - Class 6: [R Functions Lab](https://github.com/elnln/BGGN213/blob/67688a1a9518ab9def8f67dd28d397fc79d87555/BGGN213_class06/class06.md)
 - Class 7: [Machine Learning](https://github.com/elnln/BGGN213/blob/67688a1a9518ab9def8f67dd28d397fc79d87555/BGGN213_class07/class07.md)
 - Class 8: [Mini Project](https://github.com/elnln/BGGN213/blob/67688a1a9518ab9def8f67dd28d397fc79d87555/BGGN213_class08/class08.md)
